@@ -13,7 +13,7 @@ class filtro(beam.DoFn):
 
 Tempo_Atrasos = (
 p1
-    | "(Tempo): Importar os dados" >> beam.io.ReadFromText(r"D:\Projetos\GCP_Dataflow_Beam\Local-Local\voos_sample.csv", skip_header_lines=1)
+    | "(Tempo): Importar os dados" >> beam.io.ReadFromText(r"D:\Projetos\GCP_Dataflow_Beam\Auxiliares\voos_sample.csv", skip_header_lines=1)
     | "(Tempo): Separar por vírgulas" >> beam.Map(lambda record: record.split(','))
     | "(Tempo): Pegar vôos de Los Angeles" >> beam.ParDo(filtro())
     | "(Tempo): Criar o par" >> beam.Map(lambda record: (record[4], int(record[9])))
@@ -23,7 +23,7 @@ p1
 
 Qtd_Atrasos = (
 p1
-    | "(Qtd): Importar os dados" >> beam.io.ReadFromText(r"D:\Projetos\GCP_Dataflow_Beam\Local-Local\voos_sample.csv", skip_header_lines=1)
+    | "(Qtd): Importar os dados" >> beam.io.ReadFromText(r"D:\Projetos\GCP_Dataflow_Beam\Auxiliares\voos_sample.csv", skip_header_lines=1)
     | "(Qtd): Separar por vírgulas" >> beam.Map(lambda record: record.split(','))
     | "(Qtd): Pegar vôos de Los Angeles" >> beam.ParDo(filtro())
     | "(Qtd): Criar o par" >> beam.Map(lambda record: (record[4], int(record[9])))
