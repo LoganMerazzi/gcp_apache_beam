@@ -1,5 +1,16 @@
 # Google Dataflow e Apache Beam no GCP
 
+## Para instalar o Apache Beam localmente
+
+- Upgrade do pip
+    - *python -m pip install --upgrade pip*
+- instalar o Apache Beam e o Apache Beam com os componente do GCP
+    - pip install apache-beam
+    - pip install apache-beam[gcp]
+    É necessário garantir que esteja instalado o pacote pandas, pois o beam faz uso na importação dos arquivos (aparentemente)    
+    - pip install pandas
+
+
 ## Funcionamento
 ```mermaid
 graph TD
@@ -11,7 +22,7 @@ SDK & SDK2 & SDK3 --> Beam --> Spark & Dataflow & Flink
 
 ```
 
-## Modelos de uso
+## Modelos de uso - Batch
 
 ```mermaid
 graph LR
@@ -43,12 +54,48 @@ User --> L1 --> DataFlow --> L2
 
 ```
 
-## Para instalar o Apache Beam localmente
+## Modelos de uso - Streaming
 
-- Upgrade do pip
-    - *python -m pip install --upgrade pip*
-- instalar o Apache Beam e o Apache Beam com os componente do GCP
-    - pip install apache-beam
-    - pip install apache-beam[gcp]
-    É necessário garantir que esteja instalado o pacote pandas, pois o beam faz uso na importação dos arquivos (aparentemente)    
-    - pip install pandas
+```mermaid
+graph LR
+
+L1[Local]
+L2[Local]
+PS[Cloud Pub/Sub]
+L1 --> PS --> L2
+
+```
+
+```mermaid
+graph LR
+
+L1[Local]
+L2[Local]
+PS[Cloud Pub/Sub]
+B[Apache Beam]
+
+L1 --> PS --> B --> L2
+
+```
+
+```mermaid
+graph LR
+
+L1[Local]
+PS[Cloud Pub/Sub]
+
+
+L1 --> PS --> DataFlow --> PS
+
+```
+
+```mermaid
+graph LR
+
+L1[Local]
+PS[Cloud Pub/Sub]
+
+L1 --> PS --> DataFlow --> BigQuery
+
+```
+
