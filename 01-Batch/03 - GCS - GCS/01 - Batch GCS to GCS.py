@@ -14,7 +14,13 @@ pipeline_options = {
 pipeline_options = PipelineOptions.from_dictionary(pipeline_options)
 p1 = beam.Pipeline(options=pipeline_options)
 
-serviceAccount = r'D:\Projetos\GCP_Dataflow_Beam\credential-sturdy-mechanic.json'
+# Variáveis
+path='/home/logan/projetos/gcp_apache_beam'
+aux=f'{path}/Auxiliares'
+voos_csv = f'{aux}/voos_sample.csv'
+
+#serviceAccount = r'D:\Projetos\GCP_Dataflow_Beam\credential-sturdy-mechanic.json'
+serviceAccount = f'{aux}/credential-sturdy-mechanic.json'
 os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = serviceAccount
 
 class filtro(beam.DoFn):
